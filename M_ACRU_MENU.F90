@@ -2,7 +2,7 @@
 ! MODULE TITLE : M_ACRU_MENU
 ! CREATED BY   : CHARMAINE BONIFACIO
 ! DATE CREATED : JULY 24, 2015
-! DATE REVISED : AUGUST 22, 2015
+! DATE REVISED : AUGUST 27, 2015
 ! DESCRIPTION  : THE MODULE CONTAINS SUBROUTINES NEEDED TO PROCESS THE MENU FILE.
 !###############################################################################
 module m_acru_menu
@@ -17,12 +17,12 @@ module m_acru_menu
     character(len=*), parameter:: format_print_var = '( 1X,A11,A55,I7 )'
     character(len=*), parameter:: format_var_summary = '( 1X,A11,A20,I7 )'
     character(len=*), parameter:: format_isubno = '( 3X,I4 )'
-    character(len=*), parameter:: format_location_line = '( F8.2,8X,F6.1,1X,F5.2,5X,I1,1X,F8.1)'
+    character(len=*), parameter:: format_location_line = '( 23X,F5.2,5X,I1)'
     character(len=*), parameter:: format_location = '( F8.2,1X,F6.3,1X,F6.1,1X,F5.2,5X,I1,1X,F8.1,33X,I4 )'
     character(len=*), parameter:: format_lr = '( 12(F6.2),4X,I4 )'
     character(len=*), parameter:: format_soils = '( 1X,F5.2,2X,F5.2,6(1X,F4.3),2(2X,F5.2),19X,I4 )'
     character(len=*), parameter:: format_albedo_line = '( 66X,I1,5X,I1 )'
-    character(len=*), parameter:: format_albedo = '( 1X,11(F4.2,1X),F4.2,6X,I1,5X,I1,3X,I4 )'
+    character(len=*), parameter:: format_albedo = '( 1X,12(F4.2,1X),5X,I1,5X,I1,3X,I4 )'
     character(len=*), parameter:: format_cerc = '( 1X,12(F4.2,1X),15X,I4 )'
     character(len=*), parameter:: format_strmflw_line = '( 25X,I1,2(2X,F5.3),3X,F4.2,29X,I4 )'
     character(len=*), parameter:: format_strmflw = '( 1X,F5.2,3X,F5.3,1X,F6.2,4X,I1,2(2X,F5.3),3X,F4.2,29X,I4 )'
@@ -31,16 +31,17 @@ module m_acru_menu
     character(len=*), parameter:: format_snow = '( 4X,I1,3(6X,I1),2(4X,I1),3X,F4.2,2(2X,F4.2),5X,I1,1X,F5.2,9X,I4 )'
     character(len=*), parameter:: format_adjustment = '( 1X,A11,A30,I7,A9,I4 )'
     character(len=*), parameter:: format_icelln_line = '( 19X,I1 )'
-    character(len=*), parameter:: format_icelln = '( 2X,I4,3X,I4,6X,I1 )'
-    character(len=*), parameter:: format_irainf = '( A70,6X,I4 )'
+    character(len=*), parameter:: format_icelln = '( 2X,I4,3X,I4,6X,I1,56X,I4 )'
+    character(len=*), parameter:: format_irainf = '( A41,35X,I4 )'
     character(len=*), parameter:: format_rain_line = '( 16X,I5,5X,I1 )'
-    character(len=*), parameter:: format_rain = '( 2(6X,I1),2X,I5,5X,I1 )'
+    character(len=*), parameter:: format_rain = '( 6X,I1,6X,I1,2X,I5,5X,I1,49X,I4 )'
     character(len=*), parameter:: format_corppt = '( 12(1X,F4.2),16X,I4 )'
-    character(len=*), parameter:: format_iobstq_line = '( 6X,2(6X,I1),56X,I4 )'
+    character(len=*), parameter:: format_iobstq_line = '( 11X,I1,6X,I1)'
     character(len=*), parameter:: format_iobstq = '( 5X,I1,2(6X,I1),56X,I4 )'
-    character(len=*), parameter:: format_corfac = '( 12(2X,F4.2),4X,I4 )'
+    character(len=*), parameter:: format_corfac = '( 12(1X,F5.3),4X,I4 )'
+    character(len=*), parameter:: format_slorad = '( 12(1X,F5.2),4X,I4 )'
     character(len=*), parameter:: format_lcover_line = '( 12X,I1,2X,F5.2,1X,F6.1,1X,F8.2 )'
-    character(len=*), parameter:: format_lcover = '( 5X,I1,6X,I1,2X,F5.2,1X,F6.1,1X,F8.2 )'
+    character(len=*), parameter:: format_lcover = '( 5X,I1,6X,I1,2X,F5.2,1X,F6.1,1X,F8.2,40X,I4 )'
 
 contains
 
@@ -72,14 +73,14 @@ contains
 !       DESCRIPTION  :  THIS SUBROUTINE WILL INITIATE THE ISUBNO VARIABLE WITH
 !                       TOTAL NUMBER OF HRU IN THE MENU FILE
 !       AUTHORED BY  :  CHARMAINE BONIFACIO
-!      DATE REVISED  :  AUGUST 7, 2015
+!      DATE REVISED  :  AUGUST 24, 2015
 !        PARAMETERS  :  INTEGER, INPUT, UNIT NUMBER ASSOCIATED WITH OPENED FILE
 !                       INTEGER, INPUT, TOTAL NUMBER OF CATCHMENT IN WATERSHED
 !
 !-------------------------------------------------------------------------------
     subroutine findTotalCatchmentNumber(unit_menu, isub_no)
 
-        character(80) :: menuheaderline
+        character(5) :: menuheaderline
         integer :: p, num_line
         integer, intent(in) :: unit_menu
         integer, intent(out) :: isub_no
@@ -89,7 +90,7 @@ contains
         do 898 while (p < num_line)
             read(unit_menu,format_line) menuheaderline
             p = p + 1
-    898 end do
+        898 end do
         read(unit_menu,format_isubno) isub_no
 
     end subroutine findTotalCatchmentNumber
@@ -121,7 +122,7 @@ contains
 !       DESCRIPTION  :  THIS SUBROUTINE WILL CALCULATE THE TOTAL NUMBER OF LINES
 !                       BASED ON READING THE FILE
 !       AUTHORED BY  :  CHARMAINE BONIFACIO
-!      DATE REVISED  :  AUGUST 21, 2015
+!      DATE REVISED  :  AUGUST 24, 2015
 !        PARAMETERS  :  INTEGER, INPUT, UNIT NUMBER ASSOCIATED WITH OPENED FILE
 !                       INTEGER, INPUT, THE TOTAL NUMBER OF LINES PROCESSED
 !                       INTEGER, OUTPUT, THE NUMBER OF LINE READ
@@ -129,7 +130,7 @@ contains
 !-------------------------------------------------------------------------------
     subroutine calculateTOTLINES(unit_menu, tot_lines)
 
-        character(80) :: dum
+        character(5) :: dum
         integer :: i
         integer, intent(in) :: unit_menu
         integer, intent(inout) :: tot_lines
@@ -331,11 +332,11 @@ contains
         write(unit_no,format_var_header) debugStat,' PARAMETER ADJUSTMENT STARTING FROM LINE '//' : ', line
         do 700 while (l <= isubno)
             read(unit_var,*) d1, d2, d3, &
-              (tmaxlr(i),i=1,12), (tminlr(i),i=1,12), &
-              depaho, depbho, depaho2, depbho2, wp1, wp2, fc1, fc2, &
-              po1, po2, abresp, bfresp, abresp2, bfresp2, &
-              qfresp, qfresp2, qfresp3, cofru, cofru2, &
-              smddep, smddep2, smddep3, isnotp, ipscor, iscree
+                             (tmaxlr(i),i=1,12), (tminlr(i),i=1,12), &
+                             depaho, depbho, depaho2, depbho2, wp1, wp2, fc1, fc2, &
+                             po1, po2, abresp, bfresp, abresp2, bfresp2, &
+                             qfresp, qfresp2, qfresp3, cofru, cofru2, &
+                             smddep, smddep2, smddep3, isnotp, ipscor, iscree
             select case (var_index)
                case (1)
                    read(unit_oldMenu,format_line) dum
@@ -472,21 +473,26 @@ contains
     subroutine initializeline(unit_no, unit_oldMenu, unit_menu, unit_var, isubno, &
                              line, var_block_index, block_var_string)
 
-        character(len=50), intent(in) :: block_var_string
+        character(50), intent(in) :: block_var_string
         integer, intent(in) :: isubno, unit_no, unit_oldMenu, unit_menu, unit_var, var_block_index
         integer, intent(inout) :: line
         character(80) :: dum, dum2
+        character(41) :: irainf
         integer ::  i, l, d1, d2
-        integer :: icelln, idstrm, prtout
-        integer :: rainFormat, pptcor, rainMap, arf
-        integer :: iobstq, iobspk, iobovr, lcover, glacie
+        integer :: icelln, idstrm
+        integer :: rainMap, arf
+        integer :: iobspk, iobovr, glacie
         integer :: icons, iswave, ihemi
-        character :: irainf
         real :: clarea, sauef, elev, alat, wssize
         real :: glmulti, gdepth, garea
         integer, dimension(12) :: icc
-        real, dimension(12) :: coiam, cay, elaim, roota, albedo
-        real, dimension(12) :: corppt, wincor, rhucor, suncor, radcor, slorad
+        real, dimension(12) :: albedo, cay, elaim, roota, coiam
+        real, dimension(12) :: corppt, wincor, rhucor, suncor, slorad, radcor
+        integer, parameter :: prtout = 0
+        integer, parameter :: rainFormat = 1
+        integer, parameter :: pptcor = 1
+        integer, parameter :: iobstq = 1
+        integer, parameter :: lcover = 1
 
         l = 1
         read(unit_var,*) dum2  ! monthly header
@@ -494,24 +500,22 @@ contains
         write(unit_no,*) sectionHeader
         write(unit_no,format_block_string) block_var_string ! variable to be processed
         write(unit_no,format_var_header) debugStat,' INITIALIZED MENU STARTING FROM LINE '//' : ', line
-        do 700 while (l <= isubno)
-            read(unit_var,*) d1, d2, icelln, idstrm, irainf, rainFormat, pptcor, &
-                             (corppt(i),i=1,12), iobstq, clarea, &
-                             sauef, elev, wssize, lcover, (wincor(i),i=1,12), &
-                             (rhucor(i),i=1,12),(albedo(i),i=1,12),(suncor(i),i=1,12),&
-                             (cay(i),i=1,12), (elaim(i),i=1,12), (roota(i),i=1,12), &
-                             (coiam(i),i=1,12), (slorad(i),i=1,12), (radcor(i),i=1,12), &
-                             (icc(i),i=1,12)
+        do 701 while (l <= isubno)
+            read(unit_var,*) d1, d2, &
+				icelln, idstrm, irainf, (corppt(i),i=1,12), clarea, sauef, elev, wssize, &
+            	(wincor(i),i=1,12), (rhucor(i),i=1,12), (albedo(i),i=1,12), &
+            	(suncor(i),i=1,12), (cay(i),i=1,12), (elaim(i),i=1,12), (roota(i),i=1,12), &
+            	(coiam(i),i=1,12), (slorad(i),i=1,12), (radcor(i),i=1,12), (icc(i),i=1,12)
             select case (var_block_index)
                case (1)
-                   read(unit_oldMenu,format_icelln_line) prtout ! read PRTOUT variable
+                   read(unit_oldMenu,format_line) dum ! read PRTOUT variable
                    write(unit_no,format_icelln) icelln, idstrm, prtout, l
                    write(unit_menu,format_icelln) icelln, idstrm, prtout, l
                case (2)
                    read(unit_oldMenu,format_line) dum
                    write(unit_no,format_irainf) irainf, l
                    write(unit_menu,format_irainf) irainf, l
-               case (3)
+			   case (3)
                    read(unit_oldMenu,format_rain_line) rainMap, arf  ! read MAP, ARF variables
                    write(unit_no,format_rain) rainFormat, pptcor, rainMap, arf, l
                    write(unit_menu,format_rain) rainFormat, pptcor, rainMap, arf, l
@@ -567,8 +571,8 @@ contains
                    write(unit_menu,format_cerc) (coiam(i),i=1,12),(l)
                case (16)
                    read(unit_oldMenu,format_line) dum
-                   write(unit_no,format_corfac) (slorad(i),i=1,12),(l)
-                   write(unit_menu,format_corfac) (wincor(i),i=1,12),(l)
+                   write(unit_no,format_slorad) (slorad(i),i=1,12),(l)
+                   write(unit_menu,format_slorad) (slorad(i),i=1,12),(l)
                case (17)
                    read(unit_oldMenu,format_line) dum
                    write(unit_no,format_corfac) (radcor(i),i=1,12),(l)
@@ -581,7 +585,7 @@ contains
            write(unit_no,format_adjustment) debugRes,' SUCCESSFULLY PROCESSED LINE ', line, ' & HRU # ',l
            l = l + 1
            line = line + 1
-    700 end do
+    701 end do
 
     end subroutine initializeline
 

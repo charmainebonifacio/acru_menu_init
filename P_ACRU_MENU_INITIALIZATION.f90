@@ -2,7 +2,7 @@
 ! MAIN TITLE   : P_ACRU_MENU_INITIALIZATION
 ! CREATED BY   : CHARMAINE BONIFACIO
 ! DATE CREATED : AUGUST 18, 2015
-! DATE REVISED : AUGUST 24, 2015
+! DATE REVISED : AUGUST 27, 2015
 ! DESCRIPTION  : THE PROGRAM WILL INITIALIZE VALUES FROM A TAB DELIMITED FILE
 !                THAT CONTAINS 23 VARIABLES: ICELLN, IDSTRM, IRAINF, FORMAT,
 !                PPTCOR, CORPPT, IOBSTQ, CLAREA, SAUEF, ELEV, WSSIZE, WINCOR,
@@ -28,16 +28,18 @@ program p_acru_menu_initialization
     character(len=*), parameter :: format_header_line = '( A11,A80 )'
     character(len=*), parameter :: format_error = '( 1X,A11,A40 )'
     character(len=*), parameter :: format_line_summary = '( 1X,A11,A30,I7 )'
-    character(len=*), parameter :: format_processed = '( 1X,A11,I7,A56 )'
+    character(len=*), parameter :: format_processed = '( 1X,A11,I7,A53 )'
     character(len=*), parameter :: format_etime = '(1X, A11,A20,F10.5 )'
     character(len=*), parameter :: format_logfile = '( 1X,A11,A20,A30 )'
     character(len=*), parameter :: format_logstat = '( 1X,A11,A20,A20 )'
     character(len=*), parameter :: format_daytime = '( 1X,A11,A20,A15 )'
     character(len=*), parameter :: format_filestat = '( 1X,A11,A20,I4 )'
-    character(len=*), parameter :: format_endmsg = '( A78, A10,A2,A5,A1 )'
+    character(len=*), parameter :: format_endmsg = '( A86,A10,A2,A5,A1 )'
+    character(len=*), parameter :: msg = 'ACRU MENU INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION AUGUST 2015. ['
+    character(len=*), parameter :: lines_processed_msg = ' NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE.'
     integer, parameter :: num_var = 18 ! NUMBER OF VARIABLE BLOCKS
     character(len=30) :: outfile, infile, logrun, varfile
-    character(len=80) :: dum, msg
+    character(len=80) :: dum
     character(len=10) :: date, date_now, date_end
     character(len=12) :: time_now, time_end
     integer :: isubno
@@ -46,7 +48,6 @@ program p_acru_menu_initialization
     integer :: lineEof, valid_stat, blockIndex
     logical :: ex
     real :: elapsed_time
-    character(len=50) :: blockString
     character(len=50), dimension(num_var) :: blockVariable
     integer, dimension(num_var) :: blockVarRow, blockContainer
 
@@ -169,144 +170,126 @@ program p_acru_menu_initialization
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 1
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(2)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 2
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(3)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 3
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(4)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 4
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(5)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 5
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(6)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 6
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(7)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 7
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(8)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 8
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(9)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 9
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(10)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 10
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(11)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 11
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(12)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 12
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(13)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 13
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(14)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 14
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(15)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 15
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(16)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 16
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(17)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 17
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         elseif(line == blockVarRow(18)) then
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 18
-            blockString = blockVariable(blockIndex)
-            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockString)
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
         else ! simply read and copy lines
@@ -318,13 +301,12 @@ program p_acru_menu_initialization
     close(20)
     write(12,*) sectionHeader
     write(12,*)
-    write(12,format_processed) debugStat, line, ' = NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE.  '
+    write(12,format_processed) debugStat, line, lines_processed_msg
     write(12,*)
-    msg = 'INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION AUGUST 2015. [ '
     write(30,format_endmsg) msg, date, '//', time_now,']'
     endfile(30)
     close(30)
-    write(*,format_processed) debugStat, line, ' = NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE. '
+    write(*,format_processed) debugStat, line, lines_processed_msg
 !***********************************************************************
 ! END PROGRAM - ELAPSED TIME
     call system_clock(count_1, count_rate, count_max)
