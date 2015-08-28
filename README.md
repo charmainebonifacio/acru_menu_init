@@ -28,17 +28,34 @@ The variables that will be updated after each run are as follows:
  - RADCOR
  - ICC
 
+The original values from the following 13 variables will also be copied:
+
+ - PRTOUT
+ - MAP
+ - ARF
+ - IOBSPK
+ - IOBOVR
+ - ALAT
+ - IHEMI
+ - ICONS
+ - ISWAVE
+ - GLACIE
+ - GLMULTI
+ - GDEPTH
+ - GAREA
+
 This script will automatically adjust the parameters for all the catchments within the ACRU model. These variables belong to six different information blocks in the Menu Parameter File:
 
- - Subcatchment Configuration : ICELLN, IDSTRM
+ - Subcatchment Configuration : ICELLN, IDSTRM, PRTOUT
  - Rainfall File Organization : IRAINF
- - Rainfal Information : FORMAT, PPTCOR
+ - Rainfal Information : FORMAT, PPTCOR, MAP, ARF
  - Monthly Rainfall Adjustment Factor : CORPPT
- - Availability of Streamflow Data : IOBSTQ
- - Localtional and Catchment Information : CALARE, SAUEF, ELEV, WSSIZE
+ - Availability of Streamflow Data : IOBSTQ, IOBSPK, IOBSVR
+ - Locational and Catchment Information : CALARE, SAUEF, ELEV, ALAT, IHEMI, WSSIZE
  - Monthly Correction Factors : WINCOR, RHUCOR, SUNCOR, SLORAD, RADCOR
- - Reference Potential Evaporation Unit Information : ALBEDO
- - Level of Land Cover : CAY, ELAIM, ROOTA
+ - Reference Potential Evaporation Unit Information : ALBEDO, ICONS, ISWAVE
+ - Level of Land Cover : LCOVER, GLACIE, GLMULTI, GDEPTH, GAREA
+ - Catchment Land Cover Information : CAY, ELAIM, ROOTA
  - Streamflow Simulation Control Variables : COIAM
  - Snow Option Variables : ICC
 
