@@ -30,7 +30,7 @@ program p_acru_menu_initialization
     character(len=*), parameter :: format_line_summary = '( 1X,A11,A30,I7 )'
     character(len=*), parameter :: format_processed = '( 1X,A11,I7,A53 )'
     character(len=*), parameter :: format_etime = '(1X, A11,A20,F10.5 )'
-    character(len=*), parameter :: format_logfile = '( 1X,A11,A20,A30 )'
+    character(len=*), parameter :: format_logfile = '( 1X,A11,A20,A31 )'
     character(len=*), parameter :: format_logstat = '( 1X,A11,A20,A20 )'
     character(len=*), parameter :: format_daytime = '( 1X,A11,A20,A15 )'
     character(len=*), parameter :: format_filestat = '( 1X,A11,A20,I4 )'
@@ -38,7 +38,8 @@ program p_acru_menu_initialization
     character(len=*), parameter :: msg = 'ACRU MENU INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION AUGUST 2015. ['
     character(len=*), parameter :: lines_processed_msg = ' NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE.'
     integer, parameter :: num_var = 18 ! NUMBER OF VARIABLE BLOCKS
-    character(len=30) :: outfile, infile, logrun, varfile
+    character(len=30) :: outfile, infile, varfile
+    character(len=31) :: logrun
     character(len=80) :: dum
     character(len=10) :: date, date_now, date_end
     character(len=12) :: time_now, time_end
@@ -55,7 +56,7 @@ program p_acru_menu_initialization
 ! START PROGRAM - DAY & TIME SETUP AND LOGFILE SETUP
     call system_clock(count_0, count_rate, count_max)
     call datetimelog(date, date_now, time_now)
-    logrun = 'LOGRUN_MENU_'//date//'.txt'
+    logrun = 'LOGRUN_MENU_INIT_'//date//'.txt'
     inquire(file=logrun, exist=ex)
     write(*,*) debugStat, ' checking file: ', logrun
     if (ex) then
