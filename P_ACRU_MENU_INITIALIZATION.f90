@@ -2,7 +2,7 @@
 ! MAIN TITLE   : P_ACRU_MENU_INITIALIZATION
 ! CREATED BY   : CHARMAINE BONIFACIO
 ! DATE CREATED : AUGUST 18, 2015
-! DATE REVISED : AUGUST 27, 2015
+! DATE REVISED : SEPTEMBER 7, 2015
 ! DESCRIPTION  : THE PROGRAM WILL INITIALIZE VALUES FROM A TAB DELIMITED FILE
 !                THAT CONTAINS 23 VARIABLES: ICELLN, IDSTRM, IRAINF, FORMAT,
 !                PPTCOR, CORPPT, IOBSTQ, CLAREA, SAUEF, ELEV, WSSIZE, WINCOR,
@@ -37,7 +37,7 @@ program p_acru_menu_initialization
     character(len=*), parameter :: format_endmsg = '( A86,A10,A2,A5,A1 )'
     character(len=*), parameter :: msg = 'ACRU MENU INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION AUGUST 2015. ['
     character(len=*), parameter :: lines_processed_msg = ' NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE.'
-    integer, parameter :: num_var = 18 ! NUMBER OF VARIABLE BLOCKS
+    integer, parameter :: num_var = 19 ! NUMBER OF VARIABLE BLOCKS
     character(len=30) :: outfile, infile, varfile
     character(len=31) :: logrun
     character(len=80) :: dum
@@ -290,6 +290,13 @@ program p_acru_menu_initialization
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 18
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(19)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 19
             call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
