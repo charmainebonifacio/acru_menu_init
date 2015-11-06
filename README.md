@@ -1,6 +1,6 @@
 # The ACRU Parameter Initialization Menu Generator
 
-This program will only automatically adjust 43 variables in the MENU Parameter File using an updated parameter text file. Once determined, these variables will only need to be adjusted once. This program will work with a distributed mode or point mode MENU Parameter File. This program also utilizes an implemented a logfile system to ensure accuracy when dealing with the automatic adjustment of values.
+This program will only automatically adjust 46 variables in the MENU Parameter File using an updated parameter text file. Once determined, these variables will only need to be adjusted once. This program will work with a distributed mode or point mode MENU Parameter File. This program also utilizes an implemented a logfile system to ensure accuracy when dealing with the automatic adjustment of values.
 
 The variables that will be updated after each run are as follows:
 
@@ -35,7 +35,10 @@ The variables that will be updated after each run are as follows:
  - ISCREE
  - IFOR
  - SNCAPI
+ - SNORC
+ - SNIRC
  - MCDMOD
+ - SNCC
  - TPCRIT
  - TRANGE
  - ADJ
@@ -48,7 +51,7 @@ The variables that will be updated after each run are as follows:
  - SNOMC
  - SNEREL
 
-The original values from the following 16 variables will also be copied:
+The original values from the following 13 variables will also be copied:
 
  - MAP
  - ARF
@@ -63,9 +66,6 @@ The original values from the following 16 variables will also be copied:
  - GLMULTI
  - GDEPTH
  - GAREA
- - SNORC
- - SNIRC
- - SNCC
 
 This script will automatically adjust the parameters for all the catchments within the ACRU model. These variables belong to different information blocks in the Menu Parameter File:
 
