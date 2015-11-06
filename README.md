@@ -1,6 +1,6 @@
 # The ACRU Parameter Initialization Menu Generator
 
-This program will only automatically adjust 25 variables in the MENU Parameter File using an updated parameter text file. Once determined, these variables will only need to be adjusted once. This program will work with a distributed mode or point mode MENU Parameter File. This program also utilizes an implemented a logfile system to ensure accuracy when dealing with the automatic adjustment of values.
+This program will only automatically adjust 43 variables in the MENU Parameter File using an updated parameter text file. Once determined, these variables will only need to be adjusted once. This program will work with a distributed mode or point mode MENU Parameter File. This program also utilizes an implemented a logfile system to ensure accuracy when dealing with the automatic adjustment of values.
 
 The variables that will be updated after each run are as follows:
 
@@ -16,6 +16,8 @@ The variables that will be updated after each run are as follows:
  - SAUEF
  - ELEV
  - WSSIZE
+ - IYSTRT
+ - IYREND
  - TELEV
  - WINCOR
  - RHUCOR
@@ -25,12 +27,28 @@ The variables that will be updated after each run are as follows:
  - CAY
  - ELAIM
  - ROOTA
+ - FOREST
  - COIAM
+ - ISNOW
+ - ISNOTP
+ - IPSCOR
+ - ISCREE
+ - IFOR
+ - SNCAPI
+ - MCDMOD
+ - TPCRIT
+ - TRANGE
+ - ADJ
+ - TMAXSN
  - SLORAD
  - RADCOR
  - ICC
+ - CORPS
+ - TMCRIT
+ - SNOMC
+ - SNEREL
 
-The original values from the following 13 variables will also be copied:
+The original values from the following 16 variables will also be copied:
 
  - MAP
  - ARF
@@ -45,8 +63,11 @@ The original values from the following 13 variables will also be copied:
  - GLMULTI
  - GDEPTH
  - GAREA
+ - SNORC
+ - SNIRC
+ - SNCC
 
-This script will automatically adjust the parameters for all the catchments within the ACRU model. These variables belong to six different information blocks in the Menu Parameter File:
+This script will automatically adjust the parameters for all the catchments within the ACRU model. These variables belong to different information blocks in the Menu Parameter File:
 
  - Subcatchment Configuration : ICELLN, IDSTRM, PRTOUT
  - Rainfall File Organization : IRAINF
@@ -54,13 +75,16 @@ This script will automatically adjust the parameters for all the catchments with
  - Monthly Rainfall Adjustment Factor : CORPPT
  - Availability of Streamflow Data : IOBSTQ, IOBSPK, IOBSVR
  - Locational and Catchment Information : CALARE, SAUEF, ELEV, ALAT, IHEMI, WSSIZE
+ - Period of Record Simulation : IYSTRT, IYREND
  - Temperature adjustment for altitude: TELEV
  - Monthly Correction Factors : WINCOR, RHUCOR, SUNCOR, SLORAD, RADCOR
  - Reference Potential Evaporation Unit Information : ALBEDO, ICONS, ISWAVE
  - Level of Land Cover : LCOVER, GLACIE, GLMULTI, GDEPTH, GAREA
  - Catchment Land Cover Information : CAY, ELAIM, ROOTA
+ - Option Enhanced Wet Canopy Evaporation: FOREST
  - Streamflow Simulation Control Variables : COIAM
- - Snow Option Variables : ICC
+ - Snow Variables: ISNOW, ISNOTP, IPSCOR, ISCREE, IFOR, SNCAPI, MCDMOD
+ - Snow Option Variables : TPCRIT, TRANGE, ADJ, TMAXSN, ICC, CORPS, TMCRIT, SNOMC, SNEREL
 
 ## Context
 
@@ -68,7 +92,7 @@ This script will automatically adjust the parameters for all the catchments with
 
 ## Legacy
 
-The purpose is to revise the scripts to Fortran 90 and compiled using the SilverFrost Plato Fortran 95 compiler.
+The purpose is to EFFICIENTLY and EFFECTIVELY initialize the Menu Parameter File with default values. This meant revising the scripts to Fortran 90 and compiled using the SilverFrost Plato Fortran 95 compiler. 
 
 ## License
 

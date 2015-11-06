@@ -2,12 +2,14 @@
 ! MAIN TITLE   : P_ACRU_MENU_INITIALIZATION
 ! CREATED BY   : CHARMAINE BONIFACIO
 ! DATE CREATED : AUGUST 18, 2015
-! DATE REVISED : SEPTEMBER 7, 2015
+! DATE REVISED : NOVEMBER 4, 2015
 ! DESCRIPTION  : THE PROGRAM WILL INITIALIZE VALUES FROM A TAB DELIMITED FILE
 !                THAT CONTAINS 23 VARIABLES: ICELLN, IDSTRM, IRAINF, FORMAT,
-!                PPTCOR, CORPPT, IOBSTQ, CLAREA, SAUEF, ELEV, WSSIZE, TELEV,
-!                WINCOR, RHUCOR, ALBEDO, SUNCOR, LCOVER, CAY, ELAIM, ROOTA,
-!                COIAM, SLORAD, RADCOR, ICC
+!                PPTCOR, CORPPT, IOBSTQ, CLAREA, SAUEF, ELEV, WSSIZE, IYSTRT,
+!                IYREND, TELEV, WINCOR, RHUCOR, ALBEDO, SUNCOR, LCOVER, CAY,
+!                ELAIM, ROOTA, FOREST, COIAM, ISNOW, ISNOTP, IPSCOR, ISCREE,
+!                IFOR, SNCAPI, MCDMOD, TPCRIT, TRANGE, ADJ, TMAXSN, SLORAD,
+!                RADCOR, ICC, CORPS, TMCRIT, SNOMC, SNEREL
 ! REQUIREMENT  : MUST RUN THE .EXE FILE WITHIN THE INPUT DIRECTORY.
 ! MODULES      : MUST INCLUDE M_SYSTEMCHECK, M_SYSTEMLOG AND
 !                M_ACRU_MENU MODULES
@@ -37,7 +39,7 @@ program p_acru_menu_initialization
     character(len=*), parameter :: format_endmsg = '( A86,A10,A2,A5,A1 )'
     character(len=*), parameter :: msg = 'ACRU MENU INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION AUGUST 2015. ['
     character(len=*), parameter :: lines_processed_msg = ' NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE.'
-    integer, parameter :: num_var = 19 ! NUMBER OF VARIABLE BLOCKS
+    integer, parameter :: num_var = 30 ! NUMBER OF VARIABLE BLOCKS
     character(len=30) :: outfile, infile, varfile
     character(len=31) :: logrun
     character(len=80) :: dum
@@ -49,7 +51,7 @@ program p_acru_menu_initialization
     integer :: lineEof, valid_stat, blockIndex
     logical :: ex
     real :: elapsed_time
-    character(len=50), dimension(num_var) :: blockVariable
+    character(len=60), dimension(num_var) :: blockVariable
     integer, dimension(num_var) :: blockVarRow, blockContainer
 
 !***********************************************************************
@@ -161,7 +163,7 @@ program p_acru_menu_initialization
 !***********************************************************************
 ! VARIABLE CALIBRATION STARTS HERE!
     write(12,*)
-    write(12,*) '[ M E N U   F I L E   I N I T I A L I Z A T I O N ] '
+    write(12,*) ' [ M E N U   F I L E   I N I T I A L I Z A T I O N ] '
     write(12,*)
     open(unit=20,file=outfile)
     open(unit=30,file=infile)
@@ -297,6 +299,83 @@ program p_acru_menu_initialization
             open(unit=11,file=varfile)
             line_num = line
             blockIndex = 19
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(20)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 20
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(21)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 21
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(22)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 22
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(23)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 23
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(24)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 24
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(25)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 25
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(26)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 26
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(27)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 27
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(28)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 28
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(29)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 29
+            call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
+            line = line_num
+            close(11)
+        elseif(line == blockVarRow(30)) then
+            open(unit=11,file=varfile)
+            line_num = line
+            blockIndex = 30
             call initializeline(12, 20, 30, 11, isubno, line_num, blockIndex, blockVariable(blockIndex))
             line = line_num
             close(11)
