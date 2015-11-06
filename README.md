@@ -1,11 +1,12 @@
 # The ACRU Parameter Initialization Menu Generator
 
-This program will only automatically adjust 23 variables in the MENU Parameter File using an updated parameter text file. Once determined, these variables will only need to be adjusted once. This program will work with a distributed mode or point mode MENU Parameter File. This program also utilizes an implemented a logfile system to ensure accuracy when dealing with the automatic adjustment of values.
+This program will only automatically adjust 25 variables in the MENU Parameter File using an updated parameter text file. Once determined, these variables will only need to be adjusted once. This program will work with a distributed mode or point mode MENU Parameter File. This program also utilizes an implemented a logfile system to ensure accuracy when dealing with the automatic adjustment of values.
 
 The variables that will be updated after each run are as follows:
 
  - ICELLN
  - IDSTRM
+ - PRTOUT
  - IRAINF
  - FORMAT
  - PPTCOR
@@ -15,6 +16,7 @@ The variables that will be updated after each run are as follows:
  - SAUEF
  - ELEV
  - WSSIZE
+ - TELEV
  - WINCOR
  - RHUCOR
  - ALBEDO
@@ -30,13 +32,13 @@ The variables that will be updated after each run are as follows:
 
 The original values from the following 13 variables will also be copied:
 
- - PRTOUT
  - MAP
  - ARF
  - IOBSPK
  - IOBOVR
  - ALAT
  - IHEMI
+ - LRREG
  - ICONS
  - ISWAVE
  - GLACIE
@@ -52,6 +54,7 @@ This script will automatically adjust the parameters for all the catchments with
  - Monthly Rainfall Adjustment Factor : CORPPT
  - Availability of Streamflow Data : IOBSTQ, IOBSPK, IOBSVR
  - Locational and Catchment Information : CALARE, SAUEF, ELEV, ALAT, IHEMI, WSSIZE
+ - Temperature adjustment for altitude: TELEV
  - Monthly Correction Factors : WINCOR, RHUCOR, SUNCOR, SLORAD, RADCOR
  - Reference Potential Evaporation Unit Information : ALBEDO, ICONS, ISWAVE
  - Level of Land Cover : LCOVER, GLACIE, GLMULTI, GDEPTH, GAREA
