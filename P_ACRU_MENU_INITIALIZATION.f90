@@ -2,7 +2,7 @@
 ! MAIN TITLE   : P_ACRU_MENU_INITIALIZATION
 ! CREATED BY   : CHARMAINE BONIFACIO
 ! DATE CREATED : AUGUST 18, 2015
-! DATE REVISED : NOVEMBER 4, 2015
+! DATE REVISED : NOVEMBER 8, 2015
 ! DESCRIPTION  : THE PROGRAM WILL INITIALIZE VALUES FROM A TAB DELIMITED FILE
 !                THAT CONTAINS 23 VARIABLES: ICELLN, IDSTRM, IRAINF, FORMAT,
 !                PPTCOR, CORPPT, IOBSTQ, CLAREA, SAUEF, ELEV, WSSIZE, IYSTRT,
@@ -36,8 +36,8 @@ program p_acru_menu_initialization
     character(len=*), parameter :: format_logstat = '( 1X,A11,A20,A20 )'
     character(len=*), parameter :: format_daytime = '( 1X,A11,A20,A15 )'
     character(len=*), parameter :: format_filestat = '( 1X,A11,A20,I4 )'
-    character(len=*), parameter :: format_endmsg = '( A86,A10,A2,A5,A1 )'
-    character(len=*), parameter :: msg = 'ACRU MENU INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION AUGUST 2015. ['
+    character(len=*), parameter :: format_endmsg = '( A88,A10,A2,A5,A1 )'
+    character(len=*), parameter :: msg = 'ACRU MENU INITIALIZATION SCRIPT CREATED BY CHARMAINE BONIFACIO. VERSION NOVEMBER 2015. ['
     character(len=*), parameter :: lines_processed_msg = ' NUMBER OF PROCESSED LINES IN THE MENU PARAMETER FILE.'
     integer, parameter :: num_var = 30 ! NUMBER OF VARIABLE BLOCKS
     character(len=30) :: outfile, infile, varfile
@@ -161,7 +161,7 @@ program p_acru_menu_initialization
     write(12,*)
     call printResults(12, num_var, blockVariable, blockContainer, blockVarRow)
 !***********************************************************************
-! VARIABLE CALIBRATION STARTS HERE!
+! VARIABLE INITIALIZATION STARTS HERE!
     write(12,*)
     write(12,*) ' [ M E N U   F I L E   I N I T I A L I Z A T I O N ] '
     write(12,*)
